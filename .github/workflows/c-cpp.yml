@@ -1,0 +1,25 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: instal dependencies
+      run: | 
+        sudo apt-get update
+        sudo apt-get install qtbase5-dev
+        which qmake
+        
+    - name: build project
+      run: |
+        qmake -o Makefile flowers.pro
+        make
